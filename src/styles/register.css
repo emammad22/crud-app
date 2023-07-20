@@ -1,0 +1,93 @@
+.reg-container {
+    margin: 100px;
+}
+
+.reg-container .register-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.reg-container .register-inner .reg-head {
+    text-align: center;
+}
+
+.reg-head h1 {
+    font-weight: 100;
+}
+
+.register-inner .reg-form {
+    width: 400px;
+    height: auto;
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+}
+
+.reg-form .email-section,
+.password-section {
+    position: relative;
+}
+
+.email-section label,
+.password-section label {
+    position: absolute;
+    opacity: 0.5;
+    top: -7px;
+    left: 0;
+    transition: 0.25s ease;
+    font-size: 16px;
+}
+
+.reg-form .email-section input,
+.reg-form .password-section input {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+}
+
+.reg-form .email-section input:focus,
+.reg-form .password-section input:focus {
+    border-bottom: 2px solid blue;
+}
+
+.email-section input:focus+label,
+.password-section input:focus+label {
+    top: -25px;
+    left: 0;
+    opacity: 1;
+    font-size: 12px;
+}
+
+.email-section label.active,
+.password-section label.active {
+    top: -25px;
+    left: 0;
+    opacity: 1;
+    font-size: 12px;
+}
+
+.email-section input::placeholder {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 20px;
+}
+
+.reg-form .reg-button {
+    align-self: center;
+}
+
+.reg-form .reg-button .submit-register {
+    width: 90px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    border-radius: 4px;
+    background: #2BBBAD;
+    color: #fff;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16);
+}

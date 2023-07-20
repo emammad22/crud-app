@@ -1,0 +1,209 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Varela Round', sans-serif;
+}
+
+.container {
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+/* Header css begin */
+
+.header .header-inner {
+    padding: 15px;
+    background: #435d7d;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.header-inner .app-name .name {
+    color: #fff;
+}
+
+.app-name .name span {
+    font-weight: 100;
+}
+
+.header-inner .header-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.header-inner .header-buttons button {
+    border-radius: 4px;
+    padding: 10px;
+    border: none;
+    font-family: 'Varela Round', sans-serif;
+    color: #f5f5f5;
+    cursor: pointer;
+    opacity: 0.85;
+    transition: opacity 0.25s ease-in;
+}
+
+.header-buttons button:hover {
+    opacity: 1;
+}
+
+.header-buttons .delete {
+    background: #d9534f;
+}
+
+.header-buttons .logout{
+    background: none;
+}
+
+.logout i{
+    font-size: 20px;
+}
+
+.header-buttons .add {
+    background: #5cb85c;
+}
+
+.header-buttons button i {
+    margin-right: 8px;
+}
+
+/* header css end */
+
+/* Employee table css begin */
+
+.employeeList {
+    width: 100%;
+    text-align: left;
+    background-color: #fff;
+    border-collapse: collapse;
+}
+
+.employeeList .list-head tr th,
+.employeeList .list-body tr td {
+    padding: 15px 10px;
+}
+
+.list-head {
+    border-bottom: 2px solid #e9e9e9;
+}
+
+.list-body tr:nth-child(even) {
+    background: rgba(86, 103, 135, 0.05);
+    transition: background 0.15s ease;
+}
+
+.list-body tr {
+    transition: background 0.15s ease;
+    border-bottom: 1px solid #e9e9e9;
+}
+
+.list-body tr:hover {
+    background: rgba(86, 103, 135, 0.09);
+}
+
+.list-body .custom-buttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.custom-buttons .edit .fa-pen {
+    color: #FFC107;
+}
+
+.custom-buttons .delete .fa-trash {
+    color: #F44336;
+}
+
+/* Employee list css end */
+
+/* Modals - Delete, Add, Edit */
+/* Delete Employee Modals css begin */
+
+.delete-container {
+    width: 500px;
+    margin: 0 auto;
+    border-radius: 5px;
+    background: #e9e9e9;
+}
+
+.delete-container div {
+    padding: 2px 20px;
+}
+
+.delete-container .delete-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+}
+
+.delete-header h3 {
+    color: #566787;
+}
+
+.delete-header .delete-close {
+    background: none;
+    border: none;
+}
+
+.delete-close .fa-xmark {
+    color: gray;
+    opacity: 0.6;
+    transition: opacity 0.22s ease;
+}
+
+.delete-close:hover .fa-xmark {
+    opacity: 1;
+}
+
+.delete-container .delete-info {
+    padding: 30px 20px;
+}
+
+.delete-container .delete-info .delete-content {
+    color: #566787;
+    font-size: 13px;
+    line-height: 1.4px;
+    font-weight: 600;
+}
+
+.delete-info .nd-content {
+    color: #8a6d3b;
+    font-size: 10px;
+}
+
+.delete-container .delete-footer {
+    border-top: 1px solid gray;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 20px 30px;
+    gap: 15px;
+}
+
+.delete-footer button {
+    width: 90px;
+    padding: 6px 12px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.delete-footer .cancel {
+    border: #ccc;
+    background: #fff;
+}
+
+.delete-footer .delete {
+    color: #fff;
+    background: #d9534f;
+    border: #d43f3a;
+}
+
+/* Delete Modal css end */
