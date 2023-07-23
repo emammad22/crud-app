@@ -2,9 +2,6 @@ import { useEmployeeList } from "../firebase";
 import Employee from "./Employee";
 
 function EmployeeList() {
-
-
-
     return (
         <main className="main">
             <div className="container">
@@ -26,6 +23,7 @@ function EmployeeList() {
                         <tbody className="list-body">
                             {useEmployeeList().map((employee, index) => {
                                 return <Employee
+                                    id={employee.id}
                                     key={index}
                                     name={employee.name}
                                     email={employee.email}

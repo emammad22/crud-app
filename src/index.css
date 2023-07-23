@@ -151,6 +151,7 @@ body {
 .delete-header .delete-close {
     background: none;
     border: none;
+    cursor: pointer;
 }
 
 .delete-close .fa-xmark {

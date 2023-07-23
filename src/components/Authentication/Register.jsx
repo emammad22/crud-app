@@ -1,32 +1,26 @@
-import { useState } from 'react';
 import '../../styles/register.css'
 import { register } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
+import Form from './Form';
+import { useDispatch } from 'react-redux';
+import { resetForm } from '../../store/authSlicer';
 
 function Register() {
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('')
     const navigate = useNavigate();
-
-    const activeEmail = () => {
-        if (email !== '') return true;
-        return false;
-    }
-
-    const activePassword = () => {
-        if (password !== '') return true;
-        return false;
-    }
+    const dispatch = useDispatch();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const user = await register(email, password);
+        const user = await register(
+            e.target.elements.email.value,
+            e.target.elements.password.value
+        );
         if (user) {
-            navigate('/login')
+            dispatch(resetForm());
+            navigate('/login');
         }
     }
-
     return (
         <>
             <div className="reg-container">
@@ -35,21 +29,7 @@ function Register() {
                         <div className="reg-head">
                             <h1>Registration</h1>
                         </div>
-                        <form id='form' className="reg-form" onSubmit={handleSubmit}>
-                            <div className="email-section">
-                                <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-
-                                <label className={activeEmail() ? 'active' : null} htmlFor="email"><i className="fa-regular fa-envelope"></i> Email</label>
-                            </div>
-
-                            <div className="password-section">
-                                <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                                <label className={activePassword() ? 'active' : null} htmlFor="password"><i className="fa-solid fa-lock"></i> Password</label>
-                            </div>
-                            <div className="reg-button">
-                                <button className="submit-register" type='submit'>Submit</button>
-                            </div>
-                        </form>
+                        <Form handleSubmit={handleSubmit} />
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 import { getAnalytics } from 'firebase/analytics'
 import { initializeApp } from 'firebase/app'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
-import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc } from 'firebase/firestore'
+import { getFirestore, collection, addDoc, deleteDoc, doc, getDocs } from 'firebase/firestore'
 import { useEffect } from 'react';
 import { useState } from 'react';
 
@@ -56,13 +56,21 @@ export const useEmployeeList = () => {
     const [employee, setEmployee] = useState([]);
 
     useEffect(() => {
-        return onSnapshot(employeesRef, (snapshot) => {
-            setEmployee(snapshot.docs.map((doc) => {
-                const data = doc.data();
-                return data
-            }))
-        })
-    }, [])
+        const fetchData = async () => {
+            try {
+                const doc = await getDocs(employeesRef);
+                const empData = [];
+                doc.forEach((emp) => {
+                    empData.push({ id: emp.id, ...emp.data() });
+                })
+                setEmployee(empData);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+        fetchData();
+    }, [employee])
 
     return employee;
 }
@@ -72,11 +80,15 @@ export const addEmployee = async (data) => {
     const uid = auth.currentUser?.uid
     if (!uid) return;
     try {
-        await addDoc(employeesRef, {
-            ...data
+        const doc = await addDoc(employeesRef, {
+            uid: uid,
+            name: 'Ayla',
+            email: 'aylanet@mail.ru',
+            address: 'Baku, Lokbatan',
+            phone: '(+994)557907697',
         });
 
-        console.log(uid);
+        console.log(doc.id);
     } catch (err) {
         console.log(err);
     }
