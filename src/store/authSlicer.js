@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const authInitialState = {
     email: '',
     password: '',
-    user: false,
+    user: JSON.stringify(localStorage.getItem('user')) ?? false,
 }
 
 export const authSlice = createSlice({
@@ -12,8 +12,10 @@ export const authSlice = createSlice({
     reducers: {
         login: (state, action) => {
             state.user = action.payload;
+            localStorage.setItem('user', JSON.stringify(action.payload))
         },
         logout: (state) => {
+            localStorage.removeItem('user');
             state.user = false;
         },
         emailControl: (state, action) => {

@@ -3,6 +3,8 @@ import DeleteEmployee from "../modals/DeleteEmployee";
 import { useState } from "react";
 import Modal from 'react-modal'
 
+Modal.setAppElement('#root');
+
 function Employee(props) {
     const customStyles = {
         content: {
@@ -39,7 +41,6 @@ function Employee(props) {
                     <button className="delete" onClick={(e) => openDeleteModal(e.currentTarget)}><i className="fa-sharp fa-solid fa-trash" ></i></button>
                 </td>
             </tr>
-
             <Modal
                 style={customStyles}
                 isOpen={openModal}

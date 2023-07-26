@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useEmployeeList } from "../firebase";
 import Employee from "./Employee";
 
@@ -21,7 +22,7 @@ function EmployeeList() {
                             </tr>
                         </thead>
                         <tbody className="list-body">
-                            {useEmployeeList().map((employee, index) => {
+                            {useEmployeeList()?.map((employee, index) => {
                                 return <Employee
                                     id={employee.id}
                                     key={index}
