@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const authInitialState = {
+export const authInitialState = {
     email: '',
     password: '',
     user: JSON.stringify(localStorage.getItem('user')) ?? false,

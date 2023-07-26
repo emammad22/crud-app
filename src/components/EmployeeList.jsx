@@ -3,6 +3,11 @@ import { useEmployeeList } from "../firebase";
 import Employee from "./Employee";
 
 function EmployeeList() {
+
+
+    const list = useEmployeeList();
+    console.log(list);
+
     return (
         <main className="main">
             <div className="container">
@@ -22,7 +27,7 @@ function EmployeeList() {
                             </tr>
                         </thead>
                         <tbody className="list-body">
-                            {useEmployeeList()?.map((employee, index) => {
+                            {list?.map((employee, index) => {
                                 return <Employee
                                     id={employee.id}
                                     key={index}

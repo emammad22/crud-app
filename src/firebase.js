@@ -1,11 +1,10 @@
 import { getAnalytics } from 'firebase/analytics'
 import { initializeApp } from 'firebase/app'
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth'
-import { getFirestore, collection, addDoc, deleteDoc, doc, getDocs } from 'firebase/firestore'
+import { getFirestore, collection, addDoc, deleteDoc, doc, getDocs, onSnapshot } from 'firebase/firestore'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { store } from './store/store'
-import { useSelector } from 'react-redux';
 import { login as loginHandler } from './store/authSlicer'
 
 
@@ -62,40 +61,28 @@ export const logOut = async () => {
 onAuthStateChanged(auth, (user) => {
     if (user) {
         store.dispatch(loginHandler(user));
-        // console.log(user);
     }
 })
 
 // Firestore 
 
-const uid =  auth.currentUser?.uid
+const uid = JSON.parse(localStorage.getItem('user')).uid
 console.log(uid);
 
 export const useEmployeeList = () => {
+
     const [employee, setEmployee] = useState([]);
     useEffect(() => {
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                setEmployee(await fetchDataFromFiretore(user.uid))
-            } else {
-                setEmployee(null);
-            }
+        onSnapshot(employeesRef, (querySnapshot) => {
+            const empData = []
+            querySnapshot.forEach((emp) => {
+                emp.data().uid === uid ? empData.push({ id: emp.id, ...emp.data() }) : null
+            })
+            setEmployee(empData);
         })
-    }, [employee])
-    return employee;
-}
+    },[])
 
-const fetchDataFromFiretore = async (uid) => {
-    try {
-        const doc = await getDocs(employeesRef);
-        const empData = [];
-        doc.forEach((emp) => {
-            emp.data().uid == uid ? empData.push({ id: emp.id, ...emp.data() }) : null;
-        })
-        return empData;
-    } catch (err) {
-        console.log(err);
-    }
+    return employee;
 }
 
 export const addEmployee = async () => {
