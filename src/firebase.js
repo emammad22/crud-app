@@ -76,13 +76,12 @@ export const useEmployeeList = () => {
     useEffect(() => {
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                console.log(user);
                 setEmployee(await fetchDataFromFiretore(user.uid))
             } else {
                 setEmployee(null);
             }
         })
-    }, [])
+    }, [employee])
     return employee;
 }
 

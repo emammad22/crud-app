@@ -1,6 +1,7 @@
 import { deleteEmployee } from "../firebase";
 import DeleteEmployee from "../modals/DeleteEmployee";
 import { useState } from "react";
+import { useRef } from "react";
 import Modal from 'react-modal'
 
 Modal.setAppElement('#root');
@@ -17,17 +18,20 @@ function Employee(props) {
         },
     };
 
+    const parentRef = useRef(null);
     const { id, name, email, address, phone } = props;
     const [openModal, setOpenModal] = useState(false);
     const [deleteId, setDeleteId] = useState('');
 
-    const openDeleteModal = (target) => {
+    const openDeleteModal = () => {
         !openModal ? setOpenModal(true) : setOpenModal(false);
-        setDeleteId(target.parentElement.parentElement.id);
+        if(parentRef.current){
+            setDeleteId(parentRef.current.id);
+        }
     }
     return (
         <>
-            <tr id={id}>
+            <tr ref={parentRef} id={id}>
                 <td>
                     <input type="checkbox" id="checkbox1" value='1' />
                     <label htmlFor="checkbox1"></label>
@@ -36,9 +40,9 @@ function Employee(props) {
                 <td>{email}</td>
                 <td>{address}</td>
                 <td>{phone}</td>
-                <td id="1" className="custom-buttons">
+                <td className="custom-buttons">
                     <button className="edit"><i className="fa-solid fa-pen"></i></button>
-                    <button className="delete" onClick={(e) => openDeleteModal(e.currentTarget)}><i className="fa-sharp fa-solid fa-trash" ></i></button>
+                    <button className="delete" onClick={(e) => openDeleteModal()}><i className="fa-sharp fa-solid fa-trash" ></i></button>
                 </td>
             </tr>
             <Modal
