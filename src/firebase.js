@@ -66,8 +66,7 @@ onAuthStateChanged(auth, (user) => {
 
 // Firestore 
 
-const uid = JSON.parse(localStorage.getItem('user')).uid
-console.log(uid);
+// const uid = JSON.parse(localStorage.getItem('user')).uid
 
 export const useEmployeeList = () => {
 

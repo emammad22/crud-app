@@ -1,10 +1,13 @@
 import Modal from 'react-modal'
 import DeleteEmployee from '../modals/DeleteEmployee';
+import AddEmployee from '../modals/AddEmployee';
 import { useState } from 'react';
 import { addEmployee, auth, logOut } from '../firebase';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout as loggedOut } from '../store/authSlicer'
+
+Modal.setAppElement('#root');
 
 function Header() {
 
@@ -41,7 +44,7 @@ function Header() {
     }
 
     function handleAdd() {
-        addEmployee();
+        setIsOpen(true);
     }
 
     return (<>
@@ -64,6 +67,13 @@ function Header() {
             isOpen={isOpen}
         >
             <DeleteEmployee />
+        </Modal>
+
+        <Modal
+            style={customStyles}
+            isOpen={isOpen}
+        >
+            <AddEmployee />
         </Modal>
     </>);
 }

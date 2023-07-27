@@ -2,7 +2,7 @@ import Login from "./components/Authentication/Login";
 import Register from "./components/Authentication/Register";
 import { Routes, Route, } from "react-router-dom";
 import Home from "./components/Home";
-
+import './styles/addmodal.css'
 function App() {
 
   return (
